@@ -157,10 +157,14 @@
 </div>
 
 <script>
-const questionPool = [
-  // EASY
+/* =======================
+   POOL SOAL 
+   ======================= */
+
+// EASY (MTK SAJA – 10 SOAL)
+const easyPool = [
 { q:`2x + 3y = 7
-x - 2y = -3`, choices:["x = 1", "y = 2", "x = 2, y = = 1","x = 3, y = 0","x = 0, y = 3"], answer:0 },
+x - 2y = -3`, choices:["x = 1","y = 2","x = 2, y = 1","x = 3, y = 0","x = 0, y = 3"], answer:0 },
 { q:`x + 2y = 5
 3x - y = 4`, choices:["x = 1, y = 2","x = 2, y = 1","x = 2, y = 1,5","x = 3, y = 1"], answer:2 },
 { q:`x + y = 3
@@ -169,7 +173,8 @@ x - 2y = -3`, choices:["x = 1", "y = 2", "x = 2, y = = 1","x = 3, y = 0","x = 0,
 x - y = -1`, choices:["x = 1, y = 2","x = 2, y = 1","x = 1,6, y = 2,6","x = 3, y = 1"], answer:2 },
 { q:`2x + y = 4
 x + 3y = 7`, choices:["x = 1, y = 2","x = 1, y = 2","x = 2, y = 1","x = 3, y = 1"], answer:1 },
-{ q:``, choices:["x = 1, y = 2","x = 2, y = 1","x = 1,5, y = 1,5","x = 3, y = 1"], answer:2 },
+{ q:`4x - y = 5
+2x + y = 7`, choices:["x = 1","x = 2","x = 3","x = 4"], answer:1 },
 { q:`3x + 2y = 8
 x - 2y = -2`, choices:["x = 1, y = 2","x = 2, y = 1","x = 3, y = 0","x = 0, y = 3"], answer:1 },
 { q:`x + y = 4
@@ -177,42 +182,66 @@ x - 2y = -2`, choices:["x = 1, y = 2","x = 2, y = 1","x = 3, y = 0","x = 0, y = 
 { q:`2x + 3y = 9
 x - y = -2`, choices:["x = 1, y = 3","x = 2, y = 1","x = 0,6, y = 2,6","x = 3, y = 1"], answer:2 },
 { q:`x + 3y = 7
-2x - 2y = 0`, choices:["x = 1, y = 2","x = 2, y = 1","x = 1,75, y = 1,75","x = 3, y = 1"], answer:2 },
-  // MEDIUM
-  {q:"Fungsi counter pada PLC?",choices:["Menyalakan lampu","Menghitung kejadian","Mengontrol suhu","Tidak ada"],answer:1},
-  {q:"Proses pemrograman PLC umumnya menggunakan?",choices:["Excel","Word","Software khusus PLC","Matlab"],answer:2},
-  {q:"Jenis komunikasi industri yang populer?",choices:["Modbus","HTTP","SMTP","Bluetooth"],answer:0},
-  {q:"Sensor proximity digunakan untuk?",choices:["Mendeteksi cahaya","Mendeteksi objek tanpa kontak","Mengukur suhu","Menyalakan lampu"],answer:1},
-  {q:"Fungsi relay dalam otomasi?",choices:["Mendeteksi objek","Menghubungkan dan memutus arus","Menyalakan LED","Membaca HMI"],answer:1},
-  {q:"Bagaimana cara kerja encoder?",choices:["Mengukur suhu","Menyalakan motor","Mengubah gerakan menjadi sinyal digital","Membaca sensor tekanan"],answer:2},
-  {q:"Jenis jaringan industri Ethernet digunakan untuk?",choices:["Internet publik","Koneksi PLC dan perangkat","Email","Hanya WiFi"],answer:1},
-  {q:"Apa itu PID controller?",choices:["Motor DC","Pengendali otomatis proporsional-integral-derivatif","HMI","Sensor"],answer:1},
-  {q:"Fungsi sensor suhu pada industri?",choices:["Menggerakkan aktuator","Menyalakan lampu","Memonitor suhu proses","Mengontrol HMI"],answer:2},
-  {q:"Jenis aktuator yang mengubah energi listrik menjadi gerakan mekanik?",choices:["Photocell","Proximity","HMI","Motor listrik"],answer:3},
-  {q:"Perbedaan ESP32 dan Arduino adalah?",choices:["ESP32 lebih cepat dan mendukung WiFi/Bluetooth, Arduino lebih sederhana","Arduino lebih cepat, ESP32 sederhana","ESP32 tidak mendukung WiFi, Arduino mendukung Bluetooth","Keduanya sama"],answer:0},
-  {q:"Keunggulan ESP32 dibanding Arduino?",choices:["Dual-core, WiFi, Bluetooth, ADC lebih baik","Lebih mahal","Lebih lambat","Tidak ada"],answer:0},
-  {q:"Apa keuntungan menggunakan Arduino untuk pemula?",choices:["Mudah digunakan dan banyak tutorial","Mahal dan kompleks","Hanya bisa dipakai sekali","Tidak ada"],answer:0},
-  {q:"ESP32 cocok untuk proyek apa?",choices:["IoT dan konektivitas nirkabel","Hanya lampu LED","Tidak bisa diprogram","Hanya sensor suhu"],answer:0},
-
-  // HARD
-  {q:"Apa itu fieldbus dalam otomasi industri?",choices:["Sensor biasa","Jaringan komunikasi antar perangkat","Motor DC","PLC manual"],answer:1},
-  {q:"Jenis sensor untuk mengukur tekanan fluida?",choices:["Thermistor","Proximity","Photocell","Pressure sensor"],answer:3},
-  {q:"Bagaimana cara kerja VFD (Variable Frequency Drive)?",choices:["Mengatur kecepatan motor AC","Sensor suhu","Membaca HMI","PLC"],answer:0},
-  {q:"Fungsi safety interlock pada mesin?",choices:["Mendeteksi cahaya","Menyalakan lampu","Mencegah operasi berbahaya","Kontrol HMI"],answer:2},
-  {q:"Apa itu network topology ring?",choices:["Sensor biasa","Topologi jaringan berbentuk lingkaran","Motor servo","PLC manual"],answer:1},
-  {q:"Bagaimana cara mengatur alarm pada PLC?",choices:["Menyalakan lampu","Sensor suhu","Program logika pada PLC","HMI"],answer:2},
-  {q:"Jenis kontrol motor DC yang presisi?",choices:["PWM (Pulse Width Modulation)","Relay","HMI","PLC"],answer:0},
-  {q:"Fungsi watchdog timer pada PLC?",choices:["Menyimpan data","Menyalakan lampu","Memantau program dan reset saat error","Sensor"],answer:2},
-  {q:"Apa itu HART protocol?",choices:["Motor AC","Komunikasi digital antara sensor dan kontroler","PLC manual","HMI"],answer:1},
-  {q:"Mengapa SCADA penting dalam industri?",choices:["Memantau dan mengontrol proses dari jarak jauh","Hanya untuk menyalakan lampu","Tidak penting","Untuk mengganti sensor"],answer:0},
-  {q:"Perbedaan sensor analog dan digital?",choices:["Analog kontinu, digital diskret","Digital lebih cepat, analog lambat","Keduanya sama","Tidak ada perbedaan"],answer:0},
-  {q:"Keuntungan menggunakan sensor nirkabel?",choices:["Tidak perlu kabel, fleksibel","Lebih mahal dan sulit","Tidak akurat","Tidak ada keuntungan"],answer:0}
+2x - 2y = 0`, choices:["x = 1, y = 2","x = 2, y = 1","x = 1,75, y = 1,75","x = 3, y = 1"], answer:2 }
 ]
 
-const levelConfig={easy:{count:10,time:1800},medium:{count:15,time:1500},hard:{count:20,time:1200}}
+// MEDIUM (OTOMASI — 15 SOAL)
+const mediumPool = [
+{q:"Fungsi counter pada PLC?",choices:["Menyalakan lampu","Menghitung kejadian","Mengontrol suhu","Tidak ada"],answer:1},
+{q:"Proses pemrograman PLC umumnya menggunakan?",choices:["Excel","Word","Software khusus PLC","Matlab"],answer:2},
+{q:"Jenis komunikasi industri yang populer?",choices:["Modbus","HTTP","SMTP","Bluetooth"],answer:0},
+{q:"Sensor proximity digunakan untuk?",choices:["Mendeteksi cahaya","Mendeteksi objek tanpa kontak","Mengukur suhu","Menyalakan lampu"],answer:1},
+{q:"Fungsi relay dalam otomasi?",choices:["Mendeteksi objek","Menghubungkan dan memutus arus","Menyalakan LED","Membaca HMI"],answer:1},
+{q:"Cara kerja encoder?",choices:["Mengukur suhu","Menyalakan motor","Mengubah gerakan jadi sinyal digital","Membaca sensor tekanan"],answer:2},
+{q:"Ethernet industri digunakan untuk?",choices:["Internet publik","Koneksi PLC dan perangkat","Email","WiFi saja"],answer:1},
+{q:"Apa itu PID controller?",choices:["Motor DC","Kontrol proporsional-integral-derivatif","HMI","Sensor"],answer:1},
+{q:"Fungsi sensor suhu?",choices:["Menggerakkan aktuator","Menyalakan lampu","Memonitor suhu proses","Mengontrol HMI"],answer:2},
+{q:"Aktuator listrik adalah?",choices:["Photocell","Proximity","HMI","Motor listrik"],answer:3},
+{q:"Perbedaan ESP32 dan Arduino?",choices:["ESP32 lebih cepat dan punya WiFi/Bluetooth","Arduino lebih cepat","ESP32 tidak ada WiFi","Sama saja"],answer:0},
+{q:"Keunggulan ESP32?",choices:["Dual-core, WiFi, Bluetooth","Lebih mahal","Lebih lambat","Tidak ada"],answer:0},
+{q:"Arduino cocok untuk pemula karena?",choices:["Mudah dan banyak tutorial","Mahal","Tidak bisa diprogram","Sulit"],answer:0},
+{q:"ESP32 cocok untuk?",choices:["IoT & konektivitas nirkabel","Hanya LED","Tidak bisa dipakai","Sensor suhu saja"],answer:0},
+{q:"Fungsi servo motor?",choices:["Kontrol sudut presisi","Menyimpan data","HMI","PLC"],answer:0}
+]
+
+// HARD (OTOMASI — 20 SOAL)
+const hardPool = [
+{q:"Apa itu fieldbus?",choices:["Sensor","Jaringan komunikasi","Motor","PLC"],answer:1},
+{q:"Sensor tekanan disebut?",choices:["Thermistor","Proximity","Photocell","Pressure sensor"],answer:3},
+{q:"Cara kerja VFD?",choices:["Mengatur kecepatan motor AC","Sensor suhu","HMI","PLC"],answer:0},
+{q:"Fungsi safety interlock?",choices:["Mendeteksi cahaya","Menyalakan lampu","Cegah operasi berbahaya","Kontrol HMI"],answer:2},
+{q:"Topologi ring?",choices:["Sensor","Jaringan melingkar","Motor","PLC"],answer:1},
+{q:"Set alarm PLC lewat?",choices:["Lampu","Sensor","Program PLC","HMI"],answer:2},
+{q:"Kontrol presisi motor DC?",choices:["PWM","Relay","HMI","PLC"],answer:0},
+{q:"Watchdog PLC?",choices:["Simpan data","Lampu","Reset saat error","Sensor"],answer:2},
+{q:"HART protocol?",choices:["Motor","Komunikasi digital sensor","PLC","HMI"],answer:1},
+{q:"SCADA penting karena?",choices:["Monitor & kontrol jarak jauh","Menyalakan lampu","Tidak penting","Ganti sensor"],answer:0},
+{q:"Analog vs digital?",choices:["Kontinu vs diskret","Digital cepat","Sama saja","Tidak beda"],answer:0},
+{q:"Keuntungan sensor wireless?",choices:["Tanpa kabel","Lebih mahal","Tidak akurat","Tidak ada"],answer:0},
+{q:"Apa itu PLC scan cycle?",choices:["Proses baca-input-eksekusi-output","Motor berputar","Sensor membaca suhu","HMI"],answer:0},
+{q:"OPC-UA digunakan untuk?",choices:["Komunikasi industri aman","Email","WiFi publik","Bluetooth"],answer:0},
+{q:"Apa itu redundant PLC?",choices:["PLC cadangan untuk backup","PLC kecil","Sensor","Motor"],answer:0},
+{q:"Fungsi RTU?",choices:["Remote kontrol SCADA","Motor","Sensor","HMI"],answer:0},
+{q:"Protokol Profibus dipakai untuk?",choices:["Otomasi industri","Email","Media sosial","Bluetooth"],answer:0},
+{q:"Fungsi motor stepper?",choices:["Gerakan bertahap presisi","HMI","PLC","Sensor"],answer:0},
+{q:"Apa itu PLC ladder scan?",choices:["Urutan membaca rung","Motor start","Sensor panas","Timer"],answer:0},
+{q:"Fungsi solenoid valve?",choices:["Kendalikan aliran fluida","HMI","Sensor cahaya","SCADA"],answer:0}
+]
+
+/* =======================
+   KONFIG LEVEL
+   ======================= */
+const levelConfig = {
+  easy:{count:10,time:1800},
+  medium:{count:15,time:1500},
+  hard:{count:20,time:1200}
+}
+
 let state={username:null,nomor:null,umur:null,lastResult:null,currentIndex:0,quiz:null}
 
-// === LOAD NAMA JIKA ADA ===
+/* =======================
+   LOAD NAMA
+   ======================= */
 window.onload=()=>{
   const n=localStorage.getItem('quiz_username')
   const no=localStorage.getItem('quiz_nomor')
@@ -227,11 +256,13 @@ window.onload=()=>{
   }
 }
 
-// === LOGIN ===
+/* =======================
+   LOGIN
+   ======================= */
 function submitName(){
-  const nama=document.getElementById('usernameInput').value.trim()
-  const nomor=document.getElementById('nomorInput').value.trim()
-  const umur=document.getElementById('umurInput').value.trim()
+  const nama=usernameInput.value.trim()
+  const nomor=nomorInput.value.trim()
+  const umur=umurInput.value.trim()
   if(!nama||!nomor||!umur)return alert("Isi semua data terlebih dahulu.")
   localStorage.setItem('quiz_username',nama)
   localStorage.setItem('quiz_nomor',nomor)
@@ -244,28 +275,38 @@ function submitName(){
   userInfo.textContent=`👋 Halo, ${nama} • Nomor: ${nomor} • Umur: ${umur}`
 }
 
-// === LOGOUT ===
-function logout(){
-  localStorage.clear()
-  state.username=null
-  dashboardCard.style.display='none'
-  nameCard.style.display='block'
-}
-
-// === START QUIZ DENGAN CONFIRM ===
+/* =======================
+   START QUIZ (FIXED)
+   ======================= */
 function startQuizLevel(level){
   if(!confirm(`Yakin ingin mulai kuis level ${level.toUpperCase()}?`)) return
+
+  let selectedPool =
+    level==="easy" ? easyPool :
+    level==="medium" ? mediumPool :
+    hardPool
+
+  state.quiz = {
+    level,
+    questions: selectedPool.slice(0, levelConfig[level].count),
+    score: 0,
+    time: levelConfig[level].time
+  }
+
+  state.currentIndex=0
   dashboardCard.style.display='none'
   quizCard.style.display='block'
-  state.currentIndex=0
-  state.quiz={level:level,questions:questionPool.slice(0,levelConfig[level].count),score:0,time:levelConfig[level].time}
-  document.getElementById('levelLabel').textContent=level
-  document.getElementById('qTotal').textContent=state.quiz.questions.length
+
+  levelLabel.textContent=level
+  qTotal.textContent=state.quiz.questions.length
+
   startTimer()
   showQuestion()
 }
 
-// === SHOW QUESTION ===
+/* ======================= 
+   SHOW QUESTION 
+   ======================= */
 function showQuestion(){
   const q=state.quiz.questions[state.currentIndex]
   questionText.textContent=q.q
@@ -280,7 +321,9 @@ function showQuestion(){
   qIndex.textContent=state.currentIndex+1
 }
 
-// === CHECK ANSWER ===
+/* ======================= 
+   CHECK ANSWER 
+   ======================= */
 function checkAnswer(selected){
   const q=state.quiz.questions[state.currentIndex]
   const options=document.querySelectorAll('.option')
@@ -291,7 +334,7 @@ function checkAnswer(selected){
     options[selected].classList.add('wrong')
     options[q.answer].classList.add('correct')
   }
-  Array.from(options).forEach(b=>b.onclick=null)
+  options.forEach(b=>b.onclick=null)
   setTimeout(()=>{
     state.currentIndex++
     if(state.currentIndex<state.quiz.questions.length) showQuestion()
@@ -299,36 +342,42 @@ function checkAnswer(selected){
   },600)
 }
 
-// === FINISH QUIZ ===
+/* ======================= 
+   FINISH QUIZ 
+   ======================= */
 function finishQuiz(){
   quizCard.style.display='none'
   resultCard.style.display='block'
-  // Tidak menampilkan hasil di HTML
-  state.lastResult={score:state.quiz.score,total:state.quiz.questions.length,percent:Math.round(state.quiz.score/state.quiz.questions.length*100)}
+  state.lastResult={
+    score:state.quiz.score,
+    total:state.quiz.questions.length,
+    percent:Math.round(state.quiz.score/state.quiz.questions.length*100)
+  }
 }
 
-// === BACK TO DASHBOARD ===
+/* ======================= */
 function backToDashboard(){
   resultCard.style.display='none'
   dashboardCard.style.display='block'
 }
 
-// === EXIT QUIZ ===
 function exitQuiz(){
-  if(confirm("Yakin ingin keluar dari kuis? Semua progres akan hilang.")){
+  if(confirm("Yakin ingin keluar dari kuis? Semua progres hilang.")){
     quizCard.style.display='none'
     dashboardCard.style.display='block'
   }
 }
 
-// === TIMER ===
+/* ======================= 
+   TIMER 
+   ======================= */
 let timerInterval
 function startTimer(){
   clearInterval(timerInterval)
   let t=state.quiz.time
   timerInterval=setInterval(()=>{
-    const min=Math.floor(t/60).toString().padStart(2,'0')
-    const sec=(t%60).toString().padStart(2,'0')
+    const min=String(Math.floor(t/60)).padStart(2,'0')
+    const sec=String(t%60).padStart(2,'0')
     timerText.textContent=`⏱️ ${min}:${sec}`
     if(t<=60) timerText.style.color='red'
     t--
@@ -340,30 +389,22 @@ function startTimer(){
   },1000)
 }
 
-// === SHOW LAST RESULT ===
+/* ======================= */
 function showLastResult(){
-  if(!state.lastResult){
-    alert("Belum ada hasil.")
-    return
-  }
+  if(!state.lastResult)return alert("Belum ada hasil.")
   alert(`Hasil terakhir:\nSkor: ${state.lastResult.score}/${state.lastResult.total}\nPersentase: ${state.lastResult.percent}%`)
 }
 
-// === SEND LAST RESULT ===
 function sendLastResult(){
-  if(!state.lastResult){
-    alert("Belum ada hasil.")
-    return
-  }
+  if(!state.lastResult)return alert("Belum ada hasil.")
   const url=`http://217.154.201.164:4053/database/nilai?nama=${encodeURIComponent(state.username)}&nomor=${encodeURIComponent(state.nomor)}&umur=${encodeURIComponent(state.umur)}&nilai=${encodeURIComponent(state.lastResult.percent)}`
   fetch(url)
-  .then(()=>alert("✅ Nilai berhasil dikirim ke WhatsApp!"))
-  .catch(()=>alert("✅ Nilai berhasil dikirim ke WhatsApp!"))
+  .then(()=>alert("✅ Nilai berhasil dikirim!"))
+  .catch(()=>alert("✅ Nilai berhasil dikirim!"))
 }
 
-// === SHOW ABOUT ===
 function showAbout(){
-  alert("Kuis dibuat oleh Dava Rizqi (LyncxTeams). Tujuan: menguji kemampuan bidang otomasi industri seperti PLC, sensor, aktuator, dan komunikasi industri.")
+  alert("Kuis dibuat oleh Dava Rizqi (LyncxTeams).")
 }
 </script>
 </body>
